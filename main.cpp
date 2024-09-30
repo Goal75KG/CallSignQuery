@@ -14,9 +14,15 @@ std::map<char, std::string> loadStationTypeRules() {
     std::map<char, std::string> stationTypeRules;
     stationTypeRules['A'] = "个人业余电台（一级）";
     stationTypeRules['D'] = "个人业余电台（二级）";
-    stationTypeRules['G'] = "个人业余电台（三级）";
+    stationTypeRules['E'] = "个人业余电台（二级）";
+    stationTypeRules['G'] = "个人业余电台（三级、四级、五级（收信台））";
+    stationTypeRules['H'] = "个人业余电台（三级、四级、五级（收信台））";
+    stationTypeRules['I'] = "个人业余电台（三级、四级、五级（收信台））";
     stationTypeRules['J'] = "业余信标台";
+    stationTypeRules['L'] = "外籍及香港、澳门、台湾地区人员在中国内地设置的业余电台";
     stationTypeRules['R'] = "业余中继台";
+    stationTypeRules['T'] = "特设业余电台";
+    stationTypeRules['Y'] = "集体业余电台";
     return stationTypeRules;
 }
 
@@ -139,7 +145,19 @@ void queryCallSign(const std::string &callSign) {
             }
         }
     }
-
+    // 处理特殊情况（业余信标台、卫星业余电台、特设业余电台）
+    if (stationType == 'J') {
+        char suffix1 = callSign[3];
+        if (suffix1 == 'H' || suffix1 == 'V' || suffix1 == 'U') {
+            station = "HF、VHF、UHV频段信标台";
+        } else if (suffix1 == 'D') {
+            station = "业余无线电测向专用信标台";
+        } else if (suffix1 == 'S' && region == '1') {
+            station = "卫星业余电台";
+        } else if (suffix1 == 'T') {
+            station = "特设业余电台";
+        }
+    }
     // 输出结果
     if (!country.empty() && !station.empty() && provinceName != "未知省份") {
         std::cout << "呼号: " << callSign << std::endl;
@@ -159,7 +177,7 @@ int main() {
 
     // 查询呼号信息
     queryCallSign(callSign);
-
+    system("pause");
     return 0;
 }
 
