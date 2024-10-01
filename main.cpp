@@ -3,15 +3,15 @@
 #include <string>
 
 // 加载国家前缀规则
-std::map<std::string, std::string> loadCountryPrefixRules() {
-    std::map<std::string, std::string> countryPrefixRules;
+const std::map<std::string, std::string> & loadCountryPrefixRules() {
+    static std::map<std::string, std::string> countryPrefixRules;
     countryPrefixRules["B"] = "中国";
     return countryPrefixRules;
 }
 
 // 加载电台种类规则
-std::map<char, std::string> loadStationTypeRules() {
-    std::map<char, std::string> stationTypeRules;
+const std::map<char, std::string> & loadStationTypeRules() {
+    static std::map<char, std::string> stationTypeRules;
     stationTypeRules['A'] = "个人业余电台（一级）";
     stationTypeRules['D'] = "个人业余电台（二级）";
     stationTypeRules['E'] = "个人业余电台（二级）";
@@ -27,8 +27,8 @@ std::map<char, std::string> loadStationTypeRules() {
 }
 
 // 加载大区和省份范围规则
-std::map<char, std::map<std::string, std::pair<std::string, std::string> > > loadRegionProvinceRules() {
-    std::map<char, std::map<std::string, std::pair<std::string, std::string> > > regionProvinceRules;
+const std::map<char, std::map<std::string, std::pair<std::string, std::string> > > & loadRegionProvinceRules() {
+    static std::map<char, std::map<std::string, std::pair<std::string, std::string> > > regionProvinceRules;
 
     // 第1区：北京
     regionProvinceRules['1'] = {
@@ -173,11 +173,13 @@ int main() {
     std::string callSign;
     std::cout << "请输入要查询的呼号: ";
     std::cin >> callSign;
-    std::cout << "\n查询结果如下:\n" << std::endl;
+    std::cout << "\n查询结果如下:\n\n";
 
     // 查询呼号信息
     queryCallSign(callSign);
-    system("pause");
+    std::cin.get();
+    std::cout << "\n按回车键退出。";
+    std::cin.get();
     return 0;
 }
 
