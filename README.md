@@ -16,31 +16,28 @@
 2. 克隆该仓库到本地：
 
    ```bash
-   git clone https://github.com/your_username/call-sign-query.git
+   git clone https://github.com/Goal75KG/CallSignQuery.git
    ```
 
 3. 进入项目目录：
 
    ```bash
-   cd call-sign-query
+   cd CallSignQuery
    ```
 
-4. 使用 CMake 编译项目：
+4. 使用 G++ 编译项目：
 
    ```bash
-   mkdir build
-   cd build
-   cmake ..
-   make
+   g++ main.cpp -o CallSignQuery
    ```
 
 5. 运行程序：
-
+   
    ```bash
-   ./call-sign-query
+   ./CallSignQuery  # CallSignQuery.exe for Windows
    ```
 
-6. 输入你要查询的呼号，程序将输出相关信息。
+7. 输入你要查询的呼号，程序将输出相关信息。
 
 ## 示例
 
