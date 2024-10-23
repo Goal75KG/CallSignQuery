@@ -109,6 +109,14 @@ bool isWithinRange(const std::string &suffix, const std::string &rangeStart, con
     return suffix >= rangeStart && suffix <= rangeEnd;
 }
 
+// 字符串转大写
+const std::string toUpper(const std::string &callSign){
+    std::string upperCallSign = callSign;
+    for (auto s = upperCallSign.begin(); s != upperCallSign.end(); s++)
+        *s = toupper(*s);
+    return upperCallSign;
+}
+
 // 查询呼号
 void queryCallSign(const std::string &callSign) {
     // 加载各类规则
@@ -176,7 +184,8 @@ int main() {
     std::cout << "\n查询结果如下:\n\n";
 
     // 查询呼号信息
-    queryCallSign(callSign);
+    std::string upperCallSign = toUpper(callSign);  // 呼号转大写
+    queryCallSign(upperCallSign);
     std::cin.get();
     std::cout << "\n按回车键退出。";
     std::cin.get();
